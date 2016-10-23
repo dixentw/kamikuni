@@ -27,7 +27,7 @@ var (
 func workHorse() {
 	url := "http://aichun.co"
 	counter := 1
-	var records map[string]Record
+	records := make(map[string]Record)
 	for counter < 5 {
 		if counter > 1 {
 			url += "/page/" + strconv.Itoa(counter)
