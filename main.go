@@ -21,7 +21,6 @@ type Record struct {
 
 var (
 	prevRecords map[string]Record
-	batch       []Record
 )
 
 func workHorse() {
@@ -51,20 +50,28 @@ func workHorse() {
 		counter++
 	}
 	//compare to previous ids
+	var batch []Record
 	for id, rec := range records {
+		fmt.Printf("every_compare_id: %v", id)
 		_, ok := prevRecords[id]
+		fmt.Printf("fetched result: %v", ok)
 		if !ok {
 			batch = append(batch, rec)
 		}
 	}
-	Send(batch)
+	//fmt.Printf("prev: %v\n", prevRecords)
+	//fmt.Printf("curr: %v\n", records)
+	//fmt.Printf("diff: %v\n", batch)
+	if len(batch) > 0 {
+		Send(batch)
+	}
 	prevRecords = records
 }
 
 func main() {
 	fmt.Println("======program start================")
 	c := cron.New()
-	c.AddFunc("0 0 22 * * *", func() {
+	c.AddFunc("0 0 * * * *", func() {
 		fmt.Println("===========    start working   ===============")
 		workHorse()
 		fmt.Println("===========    end agent   ===============")

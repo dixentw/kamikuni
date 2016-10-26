@@ -69,8 +69,8 @@ func getClient(ctx context.Context, config *oauth2.Config) *http.Client {
 func formatRecord(records []Record) string {
 	result := "<ul>"
 	for _, rec := range records {
-		result += "<li><b>Title : </b>" + rec.title
-		result += `<li><b>Cover</b><img src="` + rec.cover + `" height="200" width="200"/>`
+		result += "<li><b>Title : </b><h3>" + rec.title + "</h3>"
+		result += `<li><b>Cover</b><img src="` + rec.cover + `" height="250" width="250"/>`
 		result += "<li><b>Info : </b>" + rec.info
 		result += "<li><b>Introduction: </b>" + rec.intro
 		links := strings.Split(rec.downloadLinks, ",")
