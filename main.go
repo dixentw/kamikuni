@@ -70,6 +70,7 @@ func workHorse() {
 
 func main() {
 	fmt.Println("======program start================")
+	fmt.Println("======program start================")
 	c := cron.New()
 	c.AddFunc("0 0 * * * *", func() {
 		fmt.Println("===========    start working   ===============")
